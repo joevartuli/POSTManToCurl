@@ -16,6 +16,7 @@ class PostManRequest
 	def to_curl
 		puts "# #{@name}"
 		puts "curl" << headers << method << data << url
+		puts
 	end        
 
 	def headers
@@ -29,7 +30,8 @@ class PostManRequest
 
 	def data
 		if !@data.empty?
-			return " #{@data.gsub("\n", "")}"
+			 modifiedData = @data.gsub("\n", "")
+			 return " -d #{modifiedData.gsub(/  +/, " ")}"
 		end
 		return ""
 	end
@@ -39,13 +41,25 @@ class PostManRequest
 	end	
 
 	def url
-		return " #{@url}"
+		return " \"#{@url}\""
 	end
 
 end
 
+def help
+	puts 'Invalid argument'
+	puts 'Usage:'
+	puts '$ ruby PostManRequest.rb fileToParse'
+	puts
+end
+
 def main
-	file = File.open("<FILE_TO_READ>", "r")
+	if ARGV.length != 1
+		help
+		exit 1
+	end
+
+	file = File.open(ARGV[0], "r")
 	contents = file.read
 	parsedContent = JSON.parse contents
 
