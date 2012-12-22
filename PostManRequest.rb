@@ -31,7 +31,7 @@ class PostManRequest
 	def data
 		if !@data.empty?
 			 modifiedData = @data.gsub("\n", "")
-			 return " -d #{modifiedData.gsub(/  +/, " ")}"
+			 return " -d '#{modifiedData.gsub(/  +/, " ")}'"
 		end
 		return ""
 	end
