@@ -9,7 +9,7 @@ How to use POSTManToCurl
 In POSTMan, export your collection to JSON and save it to disk. Run the ruby code as described below
 
 <code>
-ruby PostManRequest.rb <FileToParse>
+ruby PostManRequest.rb FileToParse.json
 </code>
 
 
